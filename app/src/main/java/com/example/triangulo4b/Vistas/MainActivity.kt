@@ -1,5 +1,6 @@
 package com.example.triangulo4b.Vistas
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -49,6 +50,13 @@ class MainActivity : AppCompatActivity(), ContratoTriangulo.Vista {
             val l2=txtl2.text.toString().toFloat()
             val l3=txtl3.text.toString().toFloat()
             presentador.perimetro(l1,l2,l3)
+
+            val intent = Intent(this, ResultadosView::class.java)
+            intent.putExtra("lado1",l1)
+            intent.putExtra("lado2",l2)
+            intent.putExtra("lado3", l3)
+
+            startActivity(intent)
         }
 
         btnArea.setOnClickListener {
@@ -69,6 +77,9 @@ class MainActivity : AppCompatActivity(), ContratoTriangulo.Vista {
 
     override fun showArea(area: Float) {
         txvRes.text="El area es : ${area}"
+        val intent = Intent(this, ResultadosView::class.java)
+        intent.putExtra("resultado", txvRes.text.toString())
+        startActivity(intent)
     }
 
     override fun showPerimetro(perimetro: Float) {
